@@ -25,7 +25,8 @@ public class Configuracao {
     @Column(name = "DEBUG")
     private boolean debug = false;
 
-    @Column(name = "URL_BASE_GATEWAY")
-    private String urlBaseGateway;
+
+    @Column(name = "TRACE_API")
+    private boolean traceApi = false;
 
 }
