@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: api-teste-devops
+  config:
+    import: 'configserver:'
+  cloud:
+    config:
+
+      username: renan
+      password: renan321
+      fail-fast: true
+      retry:
+        initial-interval: 5000
+        max-attempts: 10
+        max-interval: 30000
+        multiplier: 1.5
+  jackson:
+    serialization:
+      indent_output: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      group:
+        custom:
+          include: diskSpace, ping
+          show-components: always
+          show-details: always

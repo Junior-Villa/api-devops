@@ -1,0 +1,38 @@
+server:
+  port: 8085
+  servlet:
+    context-path: '/api-nota/'
+
+spring:
+  application:
+    name: sessao-service
+  datasource:
+    url: jdbc:mysql://localhost:6033/${sifat.banco.nome}
+    username: root
+    password: sft6033
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL8Dialect
+      jdbc:
+        lob.non-contextual-creation: true
+    properties:
+      hibernate:
+        show_sql: true
+  output:
+    ansi:
+      enabled: Always
+
+logging:
+  level:
+    com.ead: TRACE
+    root: INFO
+    org.springframework.web: DEBUG
+    org.hibernate: INFO
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://${sifat.serviceRegistry.username}:${sifat.serviceRegistry.password}@localhost:8761/eureka'
+    registerWithEureka: true
+    fetchRegistry: true
