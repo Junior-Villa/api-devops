@@ -1,7 +1,7 @@
 package br.com.sifat.model;
 
 
-import zakarta.persistence.*;
+import uakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
