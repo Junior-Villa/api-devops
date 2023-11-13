@@ -18,7 +18,7 @@ Merge-Master > Homolog:
     - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
-    - git push --force http://$API_TESTE_DEVOPS@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+    - git push --force http://Junior:$API_TESTE_DEVOPS@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
 
   only:
     - master 
@@ -38,7 +38,7 @@ Merge-Homolog > Homolog-qa:
     - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
-    - git push --force http://$API_TESTE_DEVOPS@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+    - git push --force http://Junior:$API_TESTE_DEVOPS@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
 
   only:
     - homolog
@@ -58,7 +58,7 @@ Merge-Homolog > Dev:
     - git checkout dev && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
-    - git push --force http://$API_TESTE_DEVOPS@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+    - git push --force http://Junior:$API_TESTE_DEVOPS@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
 
   only:
     - homolog         
