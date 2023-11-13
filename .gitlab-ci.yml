@@ -1,0 +1,125 @@
+stages:
+  - merge-main>master
+  - merge-master>homolog
+  - merge-homolog>homolog-qa
+  - merge-homolog-qa>dev
+
+Merge-Main > Master:
+  image: sifatsistemas/apitestedevops:main
+  stage: merge-main>master
+  tags:
+    - merge
+
+  before_script:
+    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
+    - eval `ssh-agent -s`
+    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PUBLIC_KEY" >> ~/.ssh/id_rsa.pub
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+  script: 
+    - git config --global user.email "desenvolvimento@sifat.com.br"
+    - git config --global user.name "gitlab auto-merge"
+    - export CI_JOB_TOKEN="sLMKoJYV163rFyV1AQDs"
+    - git status
+    - git add .
+    - git fetch
+    - git checkout master && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - echo $CI_COMMIT_REF_NAME
+    - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
+    - git push http://gitlab-ci-token:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+
+  only:
+    - main
+
+Merge-Master > Homolog:
+  image: sifatsistemas/apitestedevops:master
+  stage: merge-master>homolog
+  tags:
+    - merge
+
+  before_script:
+    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
+    - eval `ssh-agent -s`
+    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PUBLIC_KEY" >> ~/.ssh/id_rsa.pub
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+  script: 
+    - git config --global user.email "desenvolvimento@sifat.com.br"
+    - git config --global user.name "gitlab auto-merge"
+    - export CI_JOB_TOKEN="sLMKoJYV163rFyV1AQDs"
+    - git status
+    - git add .
+    - git fetch
+    - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - echo $CI_COMMIT_REF_NAME
+    - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
+    - git push --force http://gitlab-ci-token:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+
+  only:
+    - master 
+
+Merge-Homolog > Homolog-qa:
+  image: sifatsistemas/apitestedevops:master
+  stage: merge-homolog>homolog-qa
+  tags:
+    - merge
+
+  before_script:
+    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
+    - eval `ssh-agent -s`
+    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PUBLIC_KEY" >> ~/.ssh/id_rsa.pub
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+  script: 
+    - git config --global user.email "desenvolvimento@sifat.com.br"
+    - git config --global user.name "gitlab auto-merge"
+    - export CI_JOB_TOKEN="sLMKoJYV163rFyV1AQDs"
+    - git status
+    - git add .
+    - git fetch
+    - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - echo $CI_COMMIT_REF_NAME
+    - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
+    - git push --force http://gitlab-ci-token:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+
+  only:
+    - homolog
+
+Merge-Homolog-qa > Dev:
+  image: sifatsistemas/apitestedevops:master
+  stage: merge-homolog-qa>dev
+  tags:
+    - merge
+
+  before_script:
+    - 'which ssh-agent || ( apt-get update -qy && apt-get install openssh-client -qqy )'
+    - eval `ssh-agent -s`
+    - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null # add ssh ke
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_PUBLIC_KEY" >> ~/.ssh/id_rsa.pub
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+  script: 
+    - git config --global user.email "desenvolvimento@sifat.com.br"
+    - git config --global user.name "gitlab auto-merge"
+    - export CI_JOB_TOKEN="sLMKoJYV163rFyV1AQDs"
+    - git status
+    - git add .
+    - git fetch
+    - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - echo $CI_COMMIT_REF_NAME
+    - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
+    - git push --force http://gitlab-ci-token:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+
+  only:
+    - homolog-qa          
