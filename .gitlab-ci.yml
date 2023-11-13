@@ -4,7 +4,7 @@ stages:
   - merge-homolog>dev
 
 Merge-Master > Homolog:
-  image: bitnami/git:2.42.1
+  image: bitnami/git:2.42.1 
   stage: merge-master>homolog
   tags:
     - merge
