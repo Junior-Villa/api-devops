@@ -19,7 +19,7 @@ Merge-Master > Homolog:
     - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
-    - git push --force http://gitlab+deploy-token-1:deploy-waybe-microsservicos@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+    - git push --force http://deploy-grupo-waybe-microsservicos:api-grupo-waybe-microsservicos@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
 
   only:
     - master 
