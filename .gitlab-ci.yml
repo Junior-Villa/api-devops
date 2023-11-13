@@ -1,5 +1,5 @@
 stages:
-  - merge-master>homolog
+  - merge-master>homolog 
   - merge-homolog>homolog-qa
   - merge-homolog>dev
 
