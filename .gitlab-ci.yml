@@ -10,7 +10,7 @@ Merge-Master > Homolog:
     - merge
 
   script: 
-#    - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
+    - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
     - git config --global user.email "desenvolvimento@sifat.com.br"
     - git config --global user.name "gitlab auto-merge"
     - git status
@@ -31,7 +31,7 @@ Merge-Homolog > Dev:
     - merge
 
   script: 
-#    - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
+    - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
     - git config --global user.email "desenvolvimento@sifat.com.br"
     - git config --global user.name "gitlab auto-merge"
     - git status
@@ -52,7 +52,7 @@ Merge-Homolog > Homolog-qa:
     - merge
 
   script: 
-#    - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
+    - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
     - git config --global user.email "desenvolvimento@sifat.com.br"
     - git config --global user.name "gitlab auto-merge"
     - git status
