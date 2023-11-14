@@ -10,6 +10,7 @@ Merge-Master > Homolog:
     - merge
 
   script: 
+    - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
     - git config --global user.email "desenvolvimento@sifat.com.br"
     - git config --global user.name "gitlab auto-merge"
     - git status
@@ -18,30 +19,10 @@ Merge-Master > Homolog:
     - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
-    - git push --force http://Junior:$API_TESTE_DEVOPS@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+    - git push --force "http://gitlab-ci-token:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git"
 
   only:
     - master 
-
-Merge-Homolog > Homolog-qa:
-  image: bitnami/git:2.42.1
-  stage: merge-homolog>homolog-qa
-  tags:
-    - merge
-
-  script: 
-    - git config --global user.email "desenvolvimento@sifat.com.br"
-    - git config --global user.name "gitlab auto-merge"
-    - git status
-    - git add .
-    - git fetch
-    - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
-    - echo $CI_COMMIT_REF_NAME
-    - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
-    - git push --force http://Junior:$API_TESTE_DEVOPS@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
-
-  only:
-    - homolog
 
 Merge-Homolog > Dev:
   image: bitnami/git:2.42.1
@@ -50,6 +31,7 @@ Merge-Homolog > Dev:
     - merge
 
   script: 
+    - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
     - git config --global user.email "desenvolvimento@sifat.com.br"
     - git config --global user.name "gitlab auto-merge"
     - git status
@@ -58,7 +40,28 @@ Merge-Homolog > Dev:
     - git checkout dev && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
-    - git push --force http://Junior:$API_TESTE_DEVOPS@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git
+    - git push --force "http://gitlab-ci-token:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git"
 
   only:
-    - homolog         
+    - homolog   
+    
+Merge-Homolog > Homolog-qa:
+  image: bitnami/git:2.42.1
+  stage: merge-homolog>homolog-qa
+  tags:
+    - merge
+
+  script: 
+    - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
+    - git config --global user.email "desenvolvimento@sifat.com.br"
+    - git config --global user.name "gitlab auto-merge"
+    - git status
+    - git add .
+    - git fetch
+    - git checkout homolog-qa && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - echo $CI_COMMIT_REF_NAME
+    - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
+    - git push --force "http://gitlab-ci-token:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-microsservicos/api-teste-devops.git"
+
+  only:
+    - homolog
