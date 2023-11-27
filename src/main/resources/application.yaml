@@ -5,7 +5,7 @@ spring:
     import: 'configserver:'
   cloud:
     config:
-       uri: http://192.168.5.237:8081/config-server 
+       uri: http://192.168.5.237:8081/config-server
       username: renan
       password: renan321
       fail-fast: true
