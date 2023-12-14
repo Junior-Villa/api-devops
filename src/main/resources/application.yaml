@@ -1,22 +1,48 @@
 spring:
   application:
     name: api-teste-devops
-  config:
-    import: 'configserver:'
-  cloud:
-    config:
-      uri: http://renan:renan321@config-server:8888/
-      username: renan
-      password: renan321
-      fail-fast: true
-      retry:
-        initial-interval: 5000
-        max-attempts: 10
-        max-interval: 30000
-        multiplier: 1.5
   jackson:
     serialization:
       indent_output: true
+  datasource:
+    url: jdbc:mysql://${WAYBE_BANCO_HOST}:${WAYBE_BANCO_PORTA}/${WAYBE_BANCO_NOME}
+    username: ${WAYBE_BANCO_USUARIO}
+    password: ${WAYBE_BANCO_SENHA}
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+      jdbc:
+        lob.non-contextual-creation: true
+  output:
+    ansi:
+      enabled: Always
+  servlet:
+    multipart:
+      max-file-size: 110MB
+      max-request-size: 110MB
+sifat:
+  api:
+    url:
+      api-usuario-sessao: 'http://api-usuario-sessao/usuario-sessao'
+  serviceRegistry:
+    username: renan
+    password: renan123
+  configServer:
+    username: renan
+    password: renan321
+  auth:
+    jwtSecret: 32508b03a5320e6ec87c3c353a7f18f3c57c6f54a4a266de499a15e27a6e7a4a6194156f91685d84765711dc2ce7d8928ff912a90cc8b938d78285a6bdca1d00
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://${sifat.serviceRegistry.username}:${sifat.serviceRegistry.password}@localhost:8761/eureka'
+
+server:
+  port: 8100
+  servlet:
+    context-path: '/devops/'
+
 
 management:
   endpoints:
