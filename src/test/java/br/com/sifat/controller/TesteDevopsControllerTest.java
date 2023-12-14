@@ -21,7 +21,6 @@ class TesteDevopsControllerTest {
 
     @Test
     void testeApiEmFuncionamento() {
-
         testeDevopsController.testeApiEmFuncionamento();
     }
 
