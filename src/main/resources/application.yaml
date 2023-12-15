@@ -36,7 +36,7 @@ sifat:
 eureka:
   client:
     serviceUrl:
-      defaultZone: 'http://${sifat.serviceRegistry.username}:${sifat.serviceRegistry.password}@localhost:8761/eureka'
+      defaultZone: 'http://${sifat.serviceRegistry.username}:${sifat.serviceRegistry.password}@192.168.5.207:8761/eureka'
 
 server:
   port: 8100
