@@ -13,6 +13,7 @@ Merge-Master > Homolog:
     - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
     - git config --global user.email "desenvolvimento@sifat.com.br"
     - git config --global user.name "gitlab auto-merge"
+    - git config pull.rebase true
     - git status
     - git fetch
     - git checkout homolog # Checkout na branch que irá receber o merge
@@ -38,6 +39,7 @@ Merge-Homolog > Dev:
     - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
     - git config --global user.email "desenvolvimento@sifat.com.br"
     - git config --global user.name "gitlab auto-merge"
+    - git config pull.rebase true
     - git status
     - git fetch
     - git checkout dev # Checkout na branch que irá receber o merge
@@ -62,6 +64,7 @@ Merge-Homolog > Homolog-qa:
     - export CI_JOB_TOKEN="akKJsReWXCEj8n31Yxg2"
     - git config --global user.email "desenvolvimento@sifat.com.br"
     - git config --global user.name "gitlab auto-merge"
+    - git config pull.rebase true
     - git status
     - git fetch
     - git checkout homolog-qa # Checkout na branch que irá receber o merge
