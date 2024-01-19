@@ -18,6 +18,7 @@ Merge-Master > Homolog:
     - git fetch
     - git checkout homolog # Checkout na branch que irá receber o merge
     - git checkout .
+    - git rebase --abort
     - git pull --allow-unrelated-histories
     - echo $CI_COMMIT_REF_NAME
     - git fetch --unshallow
