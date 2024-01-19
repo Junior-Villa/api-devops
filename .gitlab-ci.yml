@@ -16,8 +16,11 @@ Merge-Master > Homolog:
     - git config pull.rebase true
     - git status
     - git fetch
-    - git branch -d homolog
     - git checkout homolog # Checkout na branch que irá receber o merge
+    - git checkout .
+    - git rebase --abort
+    - git status
+    - git pull --allow-unrelated-histories
     - echo $CI_COMMIT_REF_NAME
     - git fetch --unshallow
     - git remote set-branches origin '*'
