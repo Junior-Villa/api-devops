@@ -15,7 +15,8 @@ Merge-Master > Homolog:
     - git config --global user.name "gitlab auto-merge"
     - git status
     - git fetch
-    - git checkout homolog && git pull --rebase --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - git checkout homolog # Checkout na branch que irá receber o merge
+    - git pull --rebase --allow-unrelated-histories
     - echo $CI_COMMIT_REF_NAME
     - git fetch --unshallow
     - git remote set-branches origin '*'
@@ -38,7 +39,8 @@ Merge-Homolog > Dev:
     - git config --global user.name "gitlab auto-merge"
     - git status
     - git fetch
-    - git checkout dev && git pull --rebase --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - git checkout dev # Checkout na branch que irá receber o merge
+    - git pull --rebase --allow-unrelated-histories
     - echo $CI_COMMIT_REF_NAME
     - git fetch --unshallow
     - git remote set-branches origin '*'
@@ -61,7 +63,8 @@ Merge-Homolog > Homolog-qa:
     - git config --global user.name "gitlab auto-merge"
     - git status
     - git fetch
-    - git checkout homolog-qa && git pull --rebase --allow-unrelated-histories
+    - git checkout homolog-qa # Checkout na branch que irá receber o merge
+    - git pull --rebase --allow-unrelated-histories
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories
     - git fetch --unshallow
