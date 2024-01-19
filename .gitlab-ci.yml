@@ -17,7 +17,7 @@ Merge-Master > Homolog:
     - git fetch
     - git checkout homolog # Checkout na branch que irá receber o merge
     - git checkout .
-    - git pull --rebase --allow-unrelated-histories
+    - git pull --allow-unrelated-histories
     - echo $CI_COMMIT_REF_NAME
     - git fetch --unshallow
     - git remote set-branches origin '*'
@@ -41,7 +41,7 @@ Merge-Homolog > Dev:
     - git status
     - git fetch
     - git checkout dev # Checkout na branch que irá receber o merge
-    - git pull --rebase --allow-unrelated-histories
+    - git pull --allow-unrelated-histories
     - echo $CI_COMMIT_REF_NAME
     - git fetch --unshallow
     - git remote set-branches origin '*'
@@ -65,7 +65,7 @@ Merge-Homolog > Homolog-qa:
     - git status
     - git fetch
     - git checkout homolog-qa # Checkout na branch que irá receber o merge
-    - git pull --rebase --allow-unrelated-histories
+    - git pull --allow-unrelated-histories
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories
     - git fetch --unshallow
