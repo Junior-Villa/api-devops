@@ -65,3 +65,23 @@ Merge-Homolog > Homolog-qa:
 
   only:
     - homolog
+
+  after_script:
+    - >
+      if [ "$CI_COMMIT_BRANCH" == "mmaster" ]; then
+        def commitHash = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+        def commitAuthor = sh(script: 'git log -1 --pretty=format:%an', returnStdout: true).trim()
+        def resultMessage = "Build do projeto ${env.JOB_NAME} realizado com Sucesso"
+        def resultWebhookUrl = 'https://discord.com/api/webhooks/1166440288735203378/5QhnoWmk-Lg-BwK77IIzU_eO2lpKIGi9k52XUt-yyuGMUB2jMuV4wY4X-HAcSu8kVs4E'
+
+        if (currentBuild.resultIsBetterOrEqualTo('SUCCESS')) {
+          resultMessage = "Build do projeto ${env.JOB_NAME} Servidor GITLAB, realizado por ${commitAuthor} foi feito com Sucesso na BRANCH **${BRANCH}**"
+        } else {
+          resultMessage = "Falha no projeto <font color='red'>${env.JOB_NAME}</font>"
+        }
+        discordSend(
+          result: currentBuild.currentResult,
+          description: resultMessage,
+          webhookURL: resultWebhookUrl,
+        )
+      fi
