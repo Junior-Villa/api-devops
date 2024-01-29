@@ -79,4 +79,4 @@ after_script:
       fi
     - echo "description=$RESULT_MESSAGE" > discord_send.txt
     - echo "webhookURL=$RESULT_WEBHOOK_URL" >> discord_send.txt
-    - curl -H "Content-Type application/json" -d @discord_send.txt https://discord.com/api/webhooks/your-webhook-id/your-webhook-token
+    - curl -H "Content-Type application/json" -d @discord_send.txt https://discord.com/api/webhooks/1166440288735203378/5QhnoWmk-Lg-BwK77IIzU_eO2lpKIGi9k52XUt-yyuGMUB2jMuV4wY4X-HAcSu8kVs4E
