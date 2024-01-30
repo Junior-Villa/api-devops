@@ -65,18 +65,8 @@ after_script:
     - export COMMIT_HASH=$(git rev-parse HEAD)
     - export COMMIT_AUTHOR=$(git log -1 --pretty=format:%an)
     - export RESULT_WEBHOOK_URL=$DISCORD_WEBHOOK_URL
-    - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then
-        export BRANCH="master"
-      elif [ "$CI_COMMIT_REF_NAME" == "homolog" ]; then
-        export BRANCH="homolog"
-      else
-        export BRANCH="unknown"
-      fi
-    - if [ "$CI_COMMIT_REF_NAME" == "master" ] || [ "$CI_COMMIT_REF_NAME" == "homolog" ]; then
-        export RESULT_MESSAGE="Falha no merge do projeto ${CI_PROJECT_NAME} no Servidor ***GitLab*** na branch $BRANCH. Clique [here](${CI_JOB_URL}console) para detalhes."
-      else
-        export RESULT_MESSAGE="$CI_COMMIT_REF_NAME"
-      fi
+    - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then export BRANCH="master"; elif [ "$CI_COMMIT_REF_NAME" == "homolog" ]; then export BRANCH="homolog"; else export BRANCH="unknown"; fi
+    - if [ "$CI_COMMIT_REF_NAME" == "master" ] || [ "$CI_COMMIT_REF_NAME" == "homolog" ]; then export RESULT_MESSAGE="Falha no merge do projeto ${CI_PROJECT_NAME} no Servidor ***GitLab*** na branch $BRANCH. Clique [here](${CI_JOB_URL}console) para detalhes."; else export RESULT_MESSAGE="$CI_COMMIT_REF_NAME"; fi
     - echo "description=$RESULT_MESSAGE" > discord_send.txt
     - echo "webhookURL=$RESULT_WEBHOOK_URL" >> discord_send.txt
     - curl -H "Content-Type:application/json" -d @discord_send.txt https://discord.com/api/webhooks/1166440288735203378/5QhnoWmk-Lg-BwK77IIzU_eO2lpKIGi9k52XUt-yyuGMUB2jMuV4wY4X-HAcSu8kVs4E
