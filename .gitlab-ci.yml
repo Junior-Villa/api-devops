@@ -86,6 +86,6 @@ Merge-Homolog > Master:
     - git push --force "http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-devops.git"
 
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: manual
     - when: never
