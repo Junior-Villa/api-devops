@@ -8,10 +8,11 @@ Merge-Master > Homolog:
   stage: merge-master>homolog
   tags:
     - merge
+
   script: 
     - export CI_JOB_TOKEN="VxHD9hiXy2FzMMoetzzp"
     - git config --global user.email "desenvolvimento@sifat.com.br"
-    - git config --global user.name "MERGE-AUTOMATIZADO"
+    - git config --global user.name "gitlab auto-merge"
     - git status
     - git add .
     - git fetch
@@ -19,18 +20,22 @@ Merge-Master > Homolog:
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
     - git push --force "http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-devops.git"
-  only:
-    - master 
+
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "schedule"'
+      when: always
+    - when: never
 
 Merge-Homolog > Dev:
   image: bitnami/git:2.42.1
   stage: merge-homolog>dev
   tags:
     - merge
+
   script: 
     - export CI_JOB_TOKEN="VxHD9hiXy2FzMMoetzzp"
     - git config --global user.email "desenvolvimento@sifat.com.br"
-    - git config --global user.name "MERGE-AUTOMATIZADO"
+    - git config --global user.name "gitlab auto-merge"
     - git status
     - git add .
     - git fetch
@@ -38,18 +43,22 @@ Merge-Homolog > Dev:
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
     - git push --force "http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-devops.git"
-  only:
-    - homolog   
-    
+
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "schedule"'
+      when: always
+    - when: never
+
 Merge-Homolog > Homolog-qa:
   image: bitnami/git:2.42.1
   stage: merge-homolog>homolog-qa
   tags:
     - merge
+
   script: 
     - export CI_JOB_TOKEN="VxHD9hiXy2FzMMoetzzp"
     - git config --global user.email "desenvolvimento@sifat.com.br"
-    - git config --global user.name "MERGE-AUTOMATIZADO"
+    - git config --global user.name "gitlab auto-merge"
     - git status
     - git add .
     - git fetch
@@ -57,16 +66,8 @@ Merge-Homolog > Homolog-qa:
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
     - git push --force "http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-devops.git"
-  only:
-    - homolog
 
-after_script:
-  script |
-    - export COMMIT_HASH=$(git rev-parse HEAD)
-    - export COMMIT_AUTHOR=$(git log -1 --pretty=format:%an)
-    - export RESULT_WEBHOOK_URL=$DISCORD_WEBHOOK_URL
-    - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then export BRANCH="master"; elif [ "$CI_COMMIT_REF_NAME" == "homolog" ]; then export BRANCH="homolog"; else export BRANCH="unknown"; fi
-    - if [ "$CI_COMMIT_REF_NAME" == "master" ] || [ "$CI_COMMIT_REF_NAME" == "homolog" ]; then export RESULT_MESSAGE="Falha no merge do projeto ${CI_PROJECT_NAME} no Servidor ***GitLab*** na branch $BRANCH. Clique [here](${CI_JOB_URL}console) para detalhes."; else export RESULT_MESSAGE="$CI_COMMIT_REF_NAME"; fi
-    - echo "description=$RESULT_MESSAGE" > discord_send.txt
-    - echo "webhookURL=$RESULT_WEBHOOK_URL" >> discord_send.txt
-    - curl -H "Content-Type:application/json" -d @discord_send.txt https://discord.com/api/webhooks/1166440288735203378/5QhnoWmk-Lg-BwK77IIzU_eO2lpKIGi9k52XUt-yyuGMUB2jMuV4wY4X-HAcSu8kVs4E
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "schedule"'
+      when: always
+    - when: never
