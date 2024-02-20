@@ -87,5 +87,5 @@ Merge-Homolog > Master:
 
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule" && $CI_COMMIT_REF_NAME == "homolog"'
-      when: always
+      when: manual
     - when: never     
