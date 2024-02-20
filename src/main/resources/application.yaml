@@ -1,6 +1,8 @@
 spring:
   application:
     name: api-teste-devops
+  kafka:
+    bootstrap-servers: ${WAYBE_KAFKA_HOST}:${WAYBE_KAFKA_PORTA}    
   jackson:
     serialization:
       indent_output: true
