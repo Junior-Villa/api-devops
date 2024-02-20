@@ -2,6 +2,7 @@ stages:
   - merge-master>homolog 
   - merge-homolog>homolog-qa
   - merge-homolog>dev
+  - merge-homolog>master
 
 Merge-Master > Homolog:
   image: bitnami/git:2.42.1 
@@ -16,15 +17,13 @@ Merge-Master > Homolog:
     - git status
     - git add .
     - git fetch
-    - git checkout homolog && git pull --rebase --allow-unrelated-histories  # Checkout na branch que irá receber o merge
+    - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
     - git push --force "http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-devops.git"
 
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "schedule"'
-      when: always
-    - when: never
+  only:
+    - master 
 
 Merge-Homolog > Dev:
   image: bitnami/git:2.42.1
@@ -39,16 +38,14 @@ Merge-Homolog > Dev:
     - git status
     - git add .
     - git fetch
-    - git checkout dev && git pull --rebase --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - git checkout dev && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
     - git push --force "http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-devops.git"
 
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "schedule"'
-      when: always
-    - when: never
-
+  only:
+    - homolog   
+    
 Merge-Homolog > Homolog-qa:
   image: bitnami/git:2.42.1
   stage: merge-homolog>homolog-qa
@@ -62,7 +59,28 @@ Merge-Homolog > Homolog-qa:
     - git status
     - git add .
     - git fetch
-    - git checkout homolog-qa && git pull --rebase --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - git checkout homolog-qa && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - echo $CI_COMMIT_REF_NAME
+    - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
+    - git push --force "http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-devops.git"
+
+  only:
+    - homolog
+
+Merge-Homolog > Master:
+  image: bitnami/git:2.42.1
+  stage: merge-homolog>master
+  tags:
+    - merge
+
+  script: 
+    - export CI_JOB_TOKEN="VxHD9hiXy2FzMMoetzzp"
+    - git config --global user.email "desenvolvimento@sifat.com.br"
+    - git config --global user.name "gitlab auto-merge"
+    - git status
+    - git add .
+    - git fetch
+    - git checkout master && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
     - echo $CI_COMMIT_REF_NAME
     - git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories # Nao remover ORIGIN
     - git push --force "http://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-devops.git"
@@ -71,3 +89,6 @@ Merge-Homolog > Homolog-qa:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_PIPELINE_SOURCE == "schedule"'
       when: always
     - when: never
+    
+  only:
+    - homolog        
