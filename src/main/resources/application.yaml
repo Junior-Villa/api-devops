@@ -1,6 +1,6 @@
 spring:
   application:
-    name: api-teste-devops
+    name: api-devops
   kafka:
     bootstrap-servers: ${WAYBE_KAFKA_HOST}:${WAYBE_KAFKA_PORTA}    
   jackson:

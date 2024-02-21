@@ -11,17 +11,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(MockitoExtension.class)
-class TesteDevopsControllerTest {
+class DevopsControllerTest {
 
     @InjectMocks
-    private TesteDevopsController testeDevopsController;
+    private DevopsController DevopsController;
 
     @Mock
     private ConfiguracaoService configuracaoService;
 
     @Test
     void testeApiEmFuncionamento() {
-        testeDevopsController.testeApiEmFuncionamento();
+        DevopsController.testeApiEmFuncionamento();
     }
 
     @Test
