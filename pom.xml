@@ -219,13 +219,6 @@
             <version>3.0.0</version>
         </dependency>
         <dependency>
-            <groupId>br.com.sifat</groupId>
-            <artifactId>Core-MS</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>0.8.11</version> <!-- Verifique a versão mais recente -->
