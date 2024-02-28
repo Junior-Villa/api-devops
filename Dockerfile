@@ -1,13 +1,11 @@
-FROM bellsoft/liberica-openjdk-alpine:17.0.6 
+FROM bellsoft/liberica-openjdk-alpine:18-37
 
 WORKDIR /micro-services/api-devops
 
 ARG PROFILE
 ARG ADDITIONAL_OPTS
 
-RUN apk update && apk upgrade
-RUN apk -v cache clean
-RUN apk add curl
+RUN apk --no-cache update && apk add curl
 
 COPY /target/API-DEVOPS.jar API-DEVOPS.jar
 
