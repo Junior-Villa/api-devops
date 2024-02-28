@@ -5,8 +5,8 @@ WORKDIR /micro-services/api-devops
 ARG PROFILE
 ARG ADDITIONAL_OPTS
 
+RUN apk --no-cache update && apk --no-cache upgrade
 RUN apk -v cache clean
-RUN apk --no-cache update 
 RUN apk add curl
 
 COPY /target/API-DEVOPS.jar API-DEVOPS.jar
