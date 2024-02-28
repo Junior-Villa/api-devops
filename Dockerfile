@@ -5,7 +5,7 @@ WORKDIR /micro-services/api-devops
 ARG PROFILE
 ARG ADDITIONAL_OPTS
 
-RUN apk --no-cache update && apk --no-cache upgrade
+RUN apk update && apk upgrade
 RUN apk -v cache clean
 RUN apk add curl
 
