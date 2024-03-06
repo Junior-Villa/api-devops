@@ -6,6 +6,7 @@ ARG PROFILE
 ARG ADDITIONAL_OPTS
 
 RUN apk --no-cache update && apk add curl git
+RUN git config --global user.name "junior"
 RUN mkdir -p /tmp/bucket && export CI_JOB_TOKEN="prod@t16033"
 RUN git clone http://junior:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-bucket.git /tmp/bucket
 
