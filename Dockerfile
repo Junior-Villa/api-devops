@@ -7,7 +7,7 @@ ARG ADDITIONAL_OPTS
 
 RUN apk --no-cache update && apk add curl git
 RUN mkdir -p /tmp/bucket && export CI_JOB_TOKEN="-gmUkLxr3UV4xSXxUdDE"
-RUN git clone http://acesso-junior:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-bucket.git /tmp/bucket
+RUN git clone https://github.com/provectus/kafka-ui.git /tmp/bucket
 
 COPY /target/API-DEVOPS.jar API-DEVOPS.jar
 
