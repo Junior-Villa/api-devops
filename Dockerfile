@@ -6,8 +6,7 @@ ARG PROFILE
 ARG ADDITIONAL_OPTS
 
 RUN apk --no-cache update && apk add curl git
-RUN git clone http://192.168.5.232:8888/waybe-api-microsservicos/api-bucket.git /tmp/bucket
-RUN sleep 40
+RUN git clone http://junior:prod@t16033@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-bucket.git /tmp/bucket
 
 COPY /target/API-DEVOPS.jar API-DEVOPS.jar
 
