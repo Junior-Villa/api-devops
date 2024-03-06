@@ -9,4 +9,5 @@ RUN apk --no-cache update && apk add curl
 
 COPY /target/API-DEVOPS.jar API-DEVOPS.jar
 
+RUN ls -la && pwd
 CMD java ${ADDITIONAL_OPTS} -jar API-DEVOPS.jar --spring.profiles.active=${PROFILE}
