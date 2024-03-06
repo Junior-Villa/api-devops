@@ -18,7 +18,7 @@ ENV ADDITIONAL_OPTS=""
 RUN mkdir -p /tmp/bucket && \
     export CI_JOB_TOKEN="prod@t16033" && \
     git config --global credential.helper store && \
-    git clone http://junior:$CI_JOB_TOKENgitlab.sifat.com.br:8888/waybe-api-microsservicos/api-bucket.git /tmp/bucket
+    git clone http://junior:$CI_JOB_TOKEN@gitlab.sifat.com.br:8888/waybe-api-microsservicos/api-bucket.git /tmp/bucket
 
 # Copiar o arquivo JAR para o diretório de trabalho
 COPY target/API-DEVOPS.jar API-DEVOPS.jar
