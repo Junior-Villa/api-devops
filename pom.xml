@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.sifat</groupId>
-    <artifactId>Api-Teste-Devops</artifactId>
+    <artifactId>Api-Devops</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Api-Teste-Devops</name>
     <description>Api-Teste-Devops</description>
@@ -247,7 +247,7 @@
     </dependencyManagement>
 
     <build>
-        <finalName>API-TESTE-DEVOPS</finalName>
+        <finalName>API-DEVOPS</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
