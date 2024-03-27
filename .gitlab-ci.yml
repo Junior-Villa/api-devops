@@ -16,7 +16,14 @@ Merge-Master > Homolog:
     - git status
     - git add .
     - git fetch
-    - git checkout homolog && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - |
+      if git checkout homolog && git pull --allow-unrelated-histories; then
+        echo "Branch 'homolog' atualizada com sucesso!"
+      else
+        echo "Erro ao atualizar a branch 'homolog'. Enviando notificação para Discord..."
+        curl -H "Content-Type: application/json" -X POST -d '{"content": "Erro durante a atualização da branch 'homolog' na pipeline GitLab. Verifique manualmente."}' https://discord.com/api/webhooks/1222534933277442078/pQbEUdTAi7o7bUug73_i8_mUfdiiS1MGBwVKs_JaajzleDBwdq2WGlLHTWwO6Odtn7Xn
+        exit 1
+      fi
     - echo $CI_COMMIT_REF_NAME
     - |
       if git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories; then
@@ -45,7 +52,14 @@ Merge-Homolog > Dev:
     - git status
     - git add .
     - git fetch
-    - git checkout dev && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - |
+      if git checkout homolog && git pull --allow-unrelated-histories; then
+        echo "Branch 'homolog' atualizada com sucesso!"
+      else
+        echo "Erro ao atualizar a branch 'homolog'. Enviando notificação para Discord..."
+        curl -H "Content-Type: application/json" -X POST -d '{"content": "Erro durante a atualização da branch 'homolog' na pipeline GitLab. Verifique manualmente."}' https://discord.com/api/webhooks/1222534933277442078/pQbEUdTAi7o7bUug73_i8_mUfdiiS1MGBwVKs_JaajzleDBwdq2WGlLHTWwO6Odtn7Xn
+        exit 1
+      fi    
     - echo $CI_COMMIT_REF_NAME
     - |
       if git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories; then
@@ -74,7 +88,14 @@ Merge-Homolog > Homolog-qa:
     - git status
     - git add .
     - git fetch
-    - git checkout homolog-qa && git pull --allow-unrelated-histories # Checkout na branch que irá receber o merge
+    - |
+      if git checkout homolog && git pull --allow-unrelated-histories; then
+        echo "Branch 'homolog' atualizada com sucesso!"
+      else
+        echo "Erro ao atualizar a branch 'homolog'. Enviando notificação para Discord..."
+        curl -H "Content-Type: application/json" -X POST -d '{"content": "Erro durante a atualização da branch 'homolog' na pipeline GitLab. Verifique manualmente."}' https://discord.com/api/webhooks/1222534933277442078/pQbEUdTAi7o7bUug73_i8_mUfdiiS1MGBwVKs_JaajzleDBwdq2WGlLHTWwO6Odtn7Xn
+        exit 1
+      fi
     - echo $CI_COMMIT_REF_NAME
     - |
       if git merge origin/$CI_COMMIT_REF_NAME --allow-unrelated-histories; then
