@@ -1,4 +1,4 @@
-FROM bellsoft/liberica-openjdk-alpine:17.0.6
+FROM bellsoft/liberica-openjdk-alpine:17.0.6 
  
 WORKDIR /micro-services/api-devops
 
